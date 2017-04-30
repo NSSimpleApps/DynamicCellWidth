@@ -81,8 +81,8 @@ class ViewController: UIViewController {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-            layout.minimumInteritemSpacing = 2
-            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 4
+            layout.minimumLineSpacing = 4
             
             let scrollBarController = ScrollBarController(collectionViewLayout: layout)
             scrollBarController.dataSource = self
