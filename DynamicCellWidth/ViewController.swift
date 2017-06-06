@@ -8,9 +8,6 @@
 
 import UIKit
 
-private let kMinCellWidth: CGFloat = 60
-private let kMaxCellWidth: CGFloat = 120
-
 extension String: LabelCellConfigurator {
     
     var text: String? {
@@ -46,26 +43,32 @@ extension ImageText: ImageLabelCellConfigurator {
     }
 }
 
-let kBigImage = UIImage(named: "big_image")!
-let kSmallImage = UIImage(named: "small_image")!
-let kSectionHeight: CGFloat = 50
-
 class ViewController: UIViewController {
     
-    let cellTypes: [ScrollBarCellType] = [.label, .smallImage, .bigImage, .imageLabel]
+    struct Constants {
+        
+        public static let minCellWidth: CGFloat = 64
+        public static let maxCellWidth: CGFloat = 120
+        public static let sectionHeight: CGFloat = 50
+        
+        public static let bigImage = UIImage(named: "big_image")!
+        public static let smallImage = UIImage(named: "small_image")!
+    }
     
-    let items: [[Any]] = [
-        ["A", "ABC", "Title", "Double Title", "Very Long Title", "Very Very Very Long Title"],
+    let items: [(type: ScrollBarCellType, array: [Any])] = [
+        (.label, ["A", "ABC", "Title", "Double Title", "Very Long Title", "Very Very Very Long Title"]),
         
-        [kSmallImage, kSmallImage],
-        [kBigImage, kBigImage],
+        (.label, ["FOREX", "STOCKS", "FOREX"]),
         
-        [ImageText(imageValue: kSmallImage, textValue: "A"),
-         ImageText(imageValue: kSmallImage, textValue: "ABC"),
-         ImageText(imageValue: kSmallImage, textValue: "Title"),
-         ImageText(imageValue: kSmallImage, textValue: "Double Title"),
-         ImageText(imageValue: kSmallImage, textValue: "Very Long Title"),
-         ImageText(imageValue: kSmallImage, textValue: "Very Very Very Long Title")],
+        (.smallImage, [Constants.smallImage, Constants.smallImage]),
+        (.bigImage, [Constants.bigImage, Constants.bigImage]),
+        
+        (.imageLabel, [ImageText(imageValue: Constants.smallImage, textValue: "A"),
+         ImageText(imageValue: Constants.smallImage, textValue: "ABC"),
+         ImageText(imageValue: Constants.smallImage, textValue: "Title"),
+         ImageText(imageValue: Constants.smallImage, textValue: "Double Title"),
+         ImageText(imageValue: Constants.smallImage, textValue: "Very Long Title"),
+         ImageText(imageValue: Constants.smallImage, textValue: "Very Very Very Long Title")]),
     ]
     
     override func viewDidLoad() {
@@ -98,7 +101,7 @@ class ViewController: UIViewController {
             let v = scrollBarController.view!
             v.tag = tag
             v.translatesAutoresizingMaskIntoConstraints = false
-            v.heightAnchor.constraint(equalToConstant: kSectionHeight).isActive = true
+            v.heightAnchor.constraint(equalToConstant: Constants.sectionHeight).isActive = true
             
             return v
         })
@@ -122,21 +125,21 @@ extension ViewController: ScrollBarDataSource {
     
     func numberOfItems(in scrollBarController: ScrollBarController) -> Int {
         
-        return self.items[scrollBarController.view.tag].count
+        return self.items[scrollBarController.view.tag].array.count
     }
     
     func scrollBarController(_ scrollBarController: ScrollBarController, cellTypeAt item: Int) -> ScrollBarCellType {
         
-        return self.cellTypes[scrollBarController.view.tag]
+        return self.items[scrollBarController.view.tag].type
     }
     
     func scrollBarController<T>(_ scrollBarController: ScrollBarController, layout: T.Type, height: CGFloat, widthForCellAt item: Int) -> CGSize where T : SizeLayout {
         
         let tag = scrollBarController.view.tag
-        let item = self.items[tag][item]
-        let boundingSize = CGSize(width: kMaxCellWidth, height: height)
+        let item = self.items[tag].array[item]
+        let boundingSize = CGSize(width: Constants.maxCellWidth, height: height)
         
-        let width = layout.size(using: item as! T.SizeContext, boundingSize: boundingSize).width.validate(range: kMinCellWidth...kMaxCellWidth)
+        let width = layout.size(using: item as! T.SizeContext, boundingSize: boundingSize).width.validate(range: Constants.minCellWidth...Constants.maxCellWidth)
         
         return CGSize(width: width, height: height)
     }
@@ -144,7 +147,7 @@ extension ViewController: ScrollBarDataSource {
     func scrollBarController<T>(_ scrollBarController: ScrollBarController, configureCell cell: T, at item: Int) where T : CellConfiguration {
         
         let tag = scrollBarController.view.tag
-        let configurator = self.items[tag][item]
+        let configurator = self.items[tag].array[item]
         
         cell.configure(with: configurator as! T.Configurator)
     }

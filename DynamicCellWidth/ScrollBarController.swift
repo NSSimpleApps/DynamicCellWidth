@@ -139,27 +139,47 @@ extension ScrollBarController: UICollectionViewDelegateFlowLayout {
         
         let collectionViewWidth = collectionView.bounds.width
         let numberOfItems = collectionView.numberOfItems(inSection: section)
+        
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
         let sectionInset = flowLayout.sectionInset
+        let spacing = flowLayout.minimumInteritemSpacing
         
-        var totalWidth: CGFloat = 0
-        
-        for item in 0..<numberOfItems {
+        if numberOfItems == 0 {
             
-            totalWidth += self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: IndexPath(item: item, section: section)).width + flowLayout.minimumInteritemSpacing
+            return sectionInset
             
-            if totalWidth >= collectionViewWidth {
+        } else {
+            
+            var totalWidth: CGFloat = 0
+            
+            for item in 0..<numberOfItems {
                 
-                return sectionInset
+                totalWidth += self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: IndexPath(item: item, section: section)).width + spacing
+                
+                let width: CGFloat
+                
+                if item == numberOfItems - 1 {
+                    
+                    width = totalWidth - spacing
+                    
+                } else {
+                    
+                    width = totalWidth
+                }
+                
+                if width >= collectionViewWidth {
+                    
+                    return sectionInset
+                }
             }
+            
+            let inset = (collectionViewWidth - totalWidth) / 2
+            
+            return UIEdgeInsets(top: sectionInset.top,
+                                left: inset,
+                                bottom: sectionInset.bottom,
+                                right: inset)
         }
-        
-        let inset = (collectionViewWidth - totalWidth) / 2
-        
-        return UIEdgeInsets(top: sectionInset.top,
-                            left: inset,
-                            bottom: sectionInset.bottom,
-                            right: inset)
     }
 }
 
