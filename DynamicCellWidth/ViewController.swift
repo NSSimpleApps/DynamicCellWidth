@@ -138,8 +138,8 @@ extension ViewController: ScrollBarDataSource {
         let tag = scrollBarController.view.tag
         let item = self.items[tag].array[item]
         let boundingSize = CGSize(width: Constants.maxCellWidth, height: height)
-        
-        let width = layout.size(using: item as! T.SizeContext, boundingSize: boundingSize).width.validate(range: Constants.minCellWidth...Constants.maxCellWidth)
+        let width = validate(layout.size(using: item as! T.SizeContext, boundingSize: boundingSize).width,
+                             in: Constants.minCellWidth...Constants.maxCellWidth)
         
         return CGSize(width: width, height: height)
     }

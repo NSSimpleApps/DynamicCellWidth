@@ -8,21 +8,15 @@
 
 import Foundation
 
-extension SignedNumber {
+func validate<T>(_ value: T, in range: ClosedRange<T>) -> T where T: SignedNumeric {
     
-    func validate(range: ClosedRange<Self>) -> Self {
+    if value < range.lowerBound {
+        return range.lowerBound
         
-        if self < range.lowerBound {
-            
-            return range.lowerBound
-            
-        } else if self > range.upperBound {
-            
-            return range.upperBound
-            
-        } else {
-            
-            return self
-        }
+    } else if value > range.upperBound {
+        return range.upperBound
+        
+    } else {
+        return value
     }
 }

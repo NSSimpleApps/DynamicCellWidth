@@ -70,10 +70,9 @@ class ImageLabelCell: UICollectionViewCell {
         return style.copy() as! NSParagraphStyle
     }
     
-    static var attributes: [String: Any] {
-        
-        return [NSFontAttributeName: self.font,
-                NSParagraphStyleAttributeName: self.style]
+    static var attributes: [NSAttributedStringKey: Any] {
+        return [NSAttributedStringKey.font: self.font,
+                NSAttributedStringKey.paragraphStyle: self.style]
     }
 }
 
