@@ -9,7 +9,6 @@
 import Foundation
 
 func validate<T>(_ value: T, in range: ClosedRange<T>) -> T where T: SignedNumeric {
-    
     if value < range.lowerBound {
         return range.lowerBound
         

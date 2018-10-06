@@ -11,11 +11,9 @@ import UIKit
 private let kImageSize = CGSize(width: 24, height: 24)
 
 class SmallImageCell: UICollectionViewCell {
-    
-    let imageView = UIImageView(frame: .zero)
+    let imageView = UIImageView()
     
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
         
         self.layer.borderColor = UIColor.red.cgColor
@@ -38,7 +36,6 @@ class SmallImageCell: UICollectionViewCell {
 }
 
 extension SmallImageCell: SizeLayout {
-    
     typealias SizeContext = UIImage
     
     static func size(using context: SizeContext,
@@ -49,16 +46,13 @@ extension SmallImageCell: SizeLayout {
 }
 
 protocol ImageCellConfigurator {
-    
     var image: UIImage? { get }
 }
 
 extension SmallImageCell: CellConfiguration {
-    
     typealias Configurator = ImageCellConfigurator
     
     func configure(with configurator: Configurator) {
-        
         self.imageView.image = configurator.image
     }
 }

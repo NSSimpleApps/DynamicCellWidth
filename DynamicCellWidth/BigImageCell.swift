@@ -9,11 +9,9 @@
 import UIKit
 
 class BigImageCell: UICollectionViewCell {
-    
-    let imageView = UIImageView(frame: .zero)
+    let imageView = UIImageView()
     
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
         
         self.layer.borderColor = UIColor.red.cgColor
@@ -36,12 +34,10 @@ class BigImageCell: UICollectionViewCell {
 }
 
 extension BigImageCell: SizeLayout {
-    
     typealias SizeContext = UIImage
     
     static func size(using context: SizeContext,
                      boundingSize: CGSize) -> CGSize {
-        
         let factor = min(boundingSize.width, boundingSize.height) / max(context.size.width, context.size.height)
         
         return CGSize(width: factor * context.size.width,
@@ -50,11 +46,9 @@ extension BigImageCell: SizeLayout {
 }
 
 extension BigImageCell: CellConfiguration {
-    
     typealias Configurator = ImageCellConfigurator
     
     func configure(with configurator: Configurator) {
-        
         self.imageView.image = configurator.image
     }
 }

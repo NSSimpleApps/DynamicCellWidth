@@ -54,9 +54,9 @@ class LabelCell: UICollectionViewCell {
         return style.copy() as! NSParagraphStyle
     }
     
-    static var attributes: [NSAttributedStringKey: Any] {
-        return [NSAttributedStringKey.font: self.font,
-                NSAttributedStringKey.paragraphStyle: self.style]
+    static var attributes: [NSAttributedString.Key: Any] {
+        return [NSAttributedString.Key.font: self.font,
+                NSAttributedString.Key.paragraphStyle: self.style]
     }
 }
 

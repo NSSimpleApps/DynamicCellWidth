@@ -9,15 +9,13 @@
 import UIKit
 
 protocol SizeLayout {
-    
     associatedtype SizeContext
     
     static func size(using context: SizeContext,
                      boundingSize: CGSize) -> CGSize
 }
 
-protocol CellConfiguration: class {
-    
+protocol CellConfiguration: AnyObject {
     associatedtype Configurator
     
     func configure(with configurator: Configurator)

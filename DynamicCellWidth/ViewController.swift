@@ -9,44 +9,34 @@
 import UIKit
 
 extension String: LabelCellConfigurator {
-    
     var text: String? {
-        
         return self
     }
 }
 
 extension UIImage: ImageCellConfigurator {
-    
     var image: UIImage? {
-        
         return self
     }
 }
 
 struct ImageText {
-    
     let imageValue: UIImage
     let textValue: String
 }
 
 extension ImageText: ImageLabelCellConfigurator {
-    
     var text: String? {
-        
         return self.textValue
     }
     
     var image: UIImage? {
-        
         return self.imageValue
     }
 }
 
 class ViewController: UIViewController {
-    
     struct Constants {
-        
         public static let minCellWidth: CGFloat = 64
         public static let maxCellWidth: CGFloat = 120
         public static let sectionHeight: CGFloat = 50
@@ -72,7 +62,6 @@ class ViewController: UIViewController {
     ]
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         self.edgesForExtendedLayout = []
@@ -80,7 +69,6 @@ class ViewController: UIViewController {
         self.title = "Dynamic sizes"
         
         let arrangedSubviews = (0..<self.items.count).map({ (tag) -> UIView in
-            
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
@@ -94,9 +82,9 @@ class ViewController: UIViewController {
                 UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .regular),
                                                UITraitCollection(verticalSizeClass: .compact)])
             
-            self.addChildViewController(scrollBarController)
-            self.setOverrideTraitCollection(traitCollection, forChildViewController: scrollBarController)
-            scrollBarController.didMove(toParentViewController: self)
+            self.addChild(scrollBarController)
+            self.setOverrideTraitCollection(traitCollection, forChild: scrollBarController)
+            scrollBarController.didMove(toParent: self)
             
             let v = scrollBarController.view!
             v.tag = tag
@@ -122,14 +110,11 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: ScrollBarDataSource {
-    
     func numberOfItems(in scrollBarController: ScrollBarController) -> Int {
-        
         return self.items[scrollBarController.view.tag].array.count
     }
     
     func scrollBarController(_ scrollBarController: ScrollBarController, cellTypeAt item: Int) -> ScrollBarCellType {
-        
         return self.items[scrollBarController.view.tag].type
     }
     
@@ -145,7 +130,6 @@ extension ViewController: ScrollBarDataSource {
     }
     
     func scrollBarController<T>(_ scrollBarController: ScrollBarController, configureCell cell: T, at item: Int) where T : CellConfiguration {
-        
         let tag = scrollBarController.view.tag
         let configurator = self.items[tag].array[item]
         

@@ -18,7 +18,6 @@ class ImageLabelCell: UICollectionViewCell {
     let imageView = UIImageView(frame: .zero)
     
     override init(frame: CGRect) {
-        
         super.init(frame: frame)
         
         self.layer.borderColor = UIColor.red.cgColor
@@ -55,12 +54,10 @@ class ImageLabelCell: UICollectionViewCell {
     }
     
     static var font: UIFont {
-        
         return UIFont.systemFont(ofSize: 10)
     }
     
     static var style: NSParagraphStyle {
-        
         let style = NSMutableParagraphStyle()
         style.alignment = .center
         style.lineBreakMode = .byTruncatingTail
@@ -70,21 +67,18 @@ class ImageLabelCell: UICollectionViewCell {
         return style.copy() as! NSParagraphStyle
     }
     
-    static var attributes: [NSAttributedStringKey: Any] {
-        return [NSAttributedStringKey.font: self.font,
-                NSAttributedStringKey.paragraphStyle: self.style]
+    static var attributes: [NSAttributedString.Key: Any] {
+        return [NSAttributedString.Key.font: self.font,
+                NSAttributedString.Key.paragraphStyle: self.style]
     }
 }
 
 extension ImageLabelCell: SizeLayout {
-    
     typealias SizeContext = ImageLabelCellConfigurator
     
     static func size(using context: SizeContext,
                      boundingSize: CGSize) -> CGSize {
-        
         if let text = context.text {
-            
             let size = CGSize(width: boundingSize.width, height: boundingSize.height / 3)
             
             let boundingRect =
@@ -98,33 +92,26 @@ extension ImageLabelCell: SizeLayout {
                           height: kImageSize.height + boundingRect.height + kTopInset + kBottomInset)
             
         } else {
-            
             return CGSize(width: kImageSize.width, height: kImageSize.height + kTopInset + kBottomInset)
         }
     }
 }
 
 protocol ImageLabelCellConfigurator {
-    
     var text: String? { get }
     var image: UIImage? { get }
 }
 
 extension ImageLabelCell: CellConfiguration {
-    
     typealias Configurator = ImageLabelCellConfigurator
     
     func configure(with configurator: Configurator) {
-        
         if let text = configurator.text {
-            
             self.label.attributedText = NSAttributedString(string: text, attributes: ImageLabelCell.attributes)
             
         } else {
-            
             self.label.attributedText = nil
         }
-        
         self.imageView.image = configurator.image
     }
 }

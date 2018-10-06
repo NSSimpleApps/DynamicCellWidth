@@ -16,29 +16,22 @@ enum ScrollBarCellType {
     case imageLabel
 }
 
-protocol ScrollBarDataSource: class {
-    
+protocol ScrollBarDataSource: AnyObject {
     func numberOfItems(in scrollBarController: ScrollBarController) -> Int
-    
     func scrollBarController(_ scrollBarController: ScrollBarController,
                              cellTypeAt item: Int) -> ScrollBarCellType
     
     func scrollBarController<T: SizeLayout>(_ scrollBarController: ScrollBarController,
-                             layout: T.Type,
-                             height: CGFloat,
+                             layout: T.Type, height: CGFloat,
                              widthForCellAt item: Int) -> CGSize
-    
     func scrollBarController<T: CellConfiguration>(_ scrollBarController: ScrollBarController,
-                             configureCell cell: T,
-                             at item: Int)
+                             configureCell cell: T, at item: Int)
 }
 
 class ScrollBarController: UICollectionViewController {
-    
     weak var dataSource: ScrollBarDataSource?
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         self.edgesForExtendedLayout = []
@@ -51,21 +44,17 @@ class ScrollBarController: UICollectionViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        
         return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         return self.dataSource?.numberOfItems(in: self) ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cellType = self.dataSource!.scrollBarController(self, cellTypeAt: indexPath.item)
         
         switch cellType {
-            
         case .bigImage:
             let bigImageCell = collectionView.dequeueReusableCell(withCellClass: BigImageCell.self, for: indexPath)
             self.dataSource?.scrollBarController(self, configureCell: bigImageCell, at: indexPath.item)
@@ -93,12 +82,10 @@ class ScrollBarController: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         print(collectionView.cellForItem(at: indexPath)!.frame.size, indexPath)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        
         super.viewWillTransition(to: size, with: coordinator)
         
         self.collectionViewLayout.invalidateLayout()
@@ -106,16 +93,13 @@ class ScrollBarController: UICollectionViewController {
 }
 
 extension ScrollBarController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if let dataSource = self.dataSource {
-            
             let type = dataSource.scrollBarController(self, cellTypeAt: indexPath.item)
             let height = collectionView.bounds.height
             
             switch type {
-            
             case .label:
                 return dataSource.scrollBarController(self, layout: LabelCell.self, height: height, widthForCellAt: indexPath.item)
                 
@@ -128,9 +112,7 @@ extension ScrollBarController: UICollectionViewDelegateFlowLayout {
             case .imageLabel:
                 return dataSource.scrollBarController(self, layout: ImageLabelCell.self, height: height, widthForCellAt: indexPath.item)
             }
-            
         } else {
-            
             return .zero
         }
     }
@@ -145,36 +127,27 @@ extension ScrollBarController: UICollectionViewDelegateFlowLayout {
         let spacing = flowLayout.minimumInteritemSpacing
         
         if numberOfItems == 0 {
-            
             return sectionInset
             
         } else {
-            
             var totalWidth: CGFloat = 0
             
             for item in 0..<numberOfItems {
-                
                 totalWidth += self.collectionView(collectionView, layout: collectionViewLayout, sizeForItemAt: IndexPath(item: item, section: section)).width + spacing
                 
                 let width: CGFloat
                 
                 if item == numberOfItems - 1 {
-                    
                     width = totalWidth - spacing
                     
                 } else {
-                    
                     width = totalWidth
                 }
-                
                 if width >= collectionViewWidth {
-                    
                     return sectionInset
                 }
             }
-            
             let inset = (collectionViewWidth - totalWidth) / 2
-            
             return UIEdgeInsets(top: sectionInset.top,
                                 left: inset,
                                 bottom: sectionInset.bottom,
