@@ -78,18 +78,14 @@ class ViewController: UIViewController {
             let scrollBarController = ScrollBarController(collectionViewLayout: layout)
             scrollBarController.dataSource = self
             
-            let traitCollection =
-                UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .regular),
-                                               UITraitCollection(verticalSizeClass: .compact)])
-            
             self.addChild(scrollBarController)
-            self.setOverrideTraitCollection(traitCollection, forChild: scrollBarController)
-            scrollBarController.didMove(toParent: self)
-            
             let v = scrollBarController.view!
+            v.traitOverrides.horizontalSizeClass = .regular
+            v.traitOverrides.verticalSizeClass = .compact
             v.tag = tag
             v.translatesAutoresizingMaskIntoConstraints = false
             v.heightAnchor.constraint(equalToConstant: Constants.sectionHeight).isActive = true
+            scrollBarController.didMove(toParent: self)
             
             return v
         })
@@ -123,8 +119,8 @@ extension ViewController: ScrollBarDataSource {
         let tag = scrollBarController.view.tag
         let item = self.items[tag].array[item]
         let boundingSize = CGSize(width: Constants.maxCellWidth, height: height)
-        let width = validate(layout.size(using: item as! T.SizeContext, boundingSize: boundingSize).width,
-                             in: Constants.minCellWidth...Constants.maxCellWidth)
+        let width = DynamicCellWidth.validate(layout.size(using: item as! T.SizeContext, boundingSize: boundingSize).width,
+                                              in: Constants.minCellWidth...Constants.maxCellWidth)
         
         return CGSize(width: width, height: height)
     }

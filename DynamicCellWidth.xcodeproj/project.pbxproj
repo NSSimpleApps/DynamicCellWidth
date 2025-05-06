@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -42,10 +42,8 @@
 /* Begin PBXFrameworksBuildPhase section */
 		B55DCE591EB379BF0049A68F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -100,8 +98,6 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-			);
 			name = DynamicCellWidth;
 			productName = DynamicCellWidth;
 			productReference = B55DCE5C1EB379BF0049A68F /* DynamicCellWidth.app */;
@@ -113,8 +109,9 @@
 		B55DCE541EB379BF0049A68F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1630;
 				ORGANIZATIONNAME = NSSimpleApps;
 				TargetAttributes = {
 					B55DCE5B1EB379BF0049A68F = {
@@ -125,7 +122,6 @@
 				};
 			};
 			buildConfigurationList = B55DCE571EB379BF0049A68F /* Build configuration list for PBXProject "DynamicCellWidth" */;
-			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -133,6 +129,7 @@
 				Base,
 			);
 			mainGroup = B55DCE531EB379BF0049A68F;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = B55DCE5D1EB379BF0049A68F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -145,19 +142,16 @@
 /* Begin PBXResourcesBuildPhase section */
 		B55DCE5A1EB379BF0049A68F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				B55DCE6A1EB379C00049A68F /* LaunchScreen.storyboard in Resources */,
 				B55DCE671EB379C00049A68F /* Assets.xcassets in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B55DCE581EB379BF0049A68F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				B55DCE741EB37A190049A68F /* UICollectionView+Helpers.swift in Sources */,
 				B55DCE721EB379EF0049A68F /* ScrollBarController.swift in Sources */,
@@ -170,7 +164,6 @@
 				B563AAF61EB470F300C3DF4D /* Number+Helpers.swift in Sources */,
 				B55DCE761EB37AE20049A68F /* ImageLabelCell.swift in Sources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -186,7 +179,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		B55DCE6C1EB379C00049A68F /* Debug */ = {
+		B55DCE6C1EB379C00049A68F /* Debug configuration for PBXProject "DynamicCellWidth" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -212,6 +205,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -222,6 +216,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -246,7 +241,7 @@
 			};
 			name = Debug;
 		};
-		B55DCE6D1EB379C00049A68F /* Release */ = {
+		B55DCE6D1EB379C00049A68F /* Release configuration for PBXProject "DynamicCellWidth" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -272,6 +267,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -282,6 +278,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -293,39 +290,48 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		B55DCE6F1EB379C00049A68F /* Debug */ = {
+		B55DCE6F1EB379C00049A68F /* Debug configuration for PBXNativeTarget "DynamicCellWidth" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DynamicCellWidth/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = NSSimpleApps.DynamicCellWidth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
-		B55DCE701EB379C00049A68F /* Release */ = {
+		B55DCE701EB379C00049A68F /* Release configuration for PBXNativeTarget "DynamicCellWidth" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DynamicCellWidth/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = NSSimpleApps.DynamicCellWidth;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -335,19 +341,17 @@
 		B55DCE571EB379BF0049A68F /* Build configuration list for PBXProject "DynamicCellWidth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B55DCE6C1EB379C00049A68F /* Debug */,
-				B55DCE6D1EB379C00049A68F /* Release */,
+				B55DCE6C1EB379C00049A68F /* Debug configuration for PBXProject "DynamicCellWidth" */,
+				B55DCE6D1EB379C00049A68F /* Release configuration for PBXProject "DynamicCellWidth" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		B55DCE6E1EB379C00049A68F /* Build configuration list for PBXNativeTarget "DynamicCellWidth" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B55DCE6F1EB379C00049A68F /* Debug */,
-				B55DCE701EB379C00049A68F /* Release */,
+				B55DCE6F1EB379C00049A68F /* Debug configuration for PBXNativeTarget "DynamicCellWidth" */,
+				B55DCE701EB379C00049A68F /* Release configuration for PBXNativeTarget "DynamicCellWidth" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */

@@ -33,7 +33,7 @@ class BigImageCell: UICollectionViewCell {
     }
 }
 
-extension BigImageCell: SizeLayout {
+extension BigImageCell: @preconcurrency SizeLayout {
     typealias SizeContext = UIImage
     
     static func size(using context: SizeContext,
@@ -45,7 +45,7 @@ extension BigImageCell: SizeLayout {
     }
 }
 
-extension BigImageCell: CellConfiguration {
+extension BigImageCell: @preconcurrency CellConfiguration {
     typealias Configurator = ImageCellConfigurator
     
     func configure(with configurator: Configurator) {

@@ -16,6 +16,7 @@ enum ScrollBarCellType {
     case imageLabel
 }
 
+@MainActor
 protocol ScrollBarDataSource: AnyObject {
     func numberOfItems(in scrollBarController: ScrollBarController) -> Int
     func scrollBarController(_ scrollBarController: ScrollBarController,

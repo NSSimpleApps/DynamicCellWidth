@@ -8,6 +8,7 @@
 
 import UIKit
 
+@preconcurrency
 protocol SizeLayout {
     associatedtype SizeContext
     
@@ -15,6 +16,7 @@ protocol SizeLayout {
                      boundingSize: CGSize) -> CGSize
 }
 
+@preconcurrency
 protocol CellConfiguration: AnyObject {
     associatedtype Configurator
     

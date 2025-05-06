@@ -60,7 +60,7 @@ class LabelCell: UICollectionViewCell {
     }
 }
 
-extension LabelCell: SizeLayout {
+extension LabelCell: @preconcurrency SizeLayout {
     
     typealias SizeContext = NSString
     
@@ -85,7 +85,7 @@ protocol LabelCellConfigurator {
     var text: String? { get }
 }
 
-extension LabelCell: CellConfiguration {
+extension LabelCell: @preconcurrency CellConfiguration {
     
     typealias Configurator = LabelCellConfigurator
     

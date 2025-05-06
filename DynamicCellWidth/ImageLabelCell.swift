@@ -73,7 +73,7 @@ class ImageLabelCell: UICollectionViewCell {
     }
 }
 
-extension ImageLabelCell: SizeLayout {
+extension ImageLabelCell: @preconcurrency SizeLayout {
     typealias SizeContext = ImageLabelCellConfigurator
     
     static func size(using context: SizeContext,
@@ -102,7 +102,7 @@ protocol ImageLabelCellConfigurator {
     var image: UIImage? { get }
 }
 
-extension ImageLabelCell: CellConfiguration {
+extension ImageLabelCell: @preconcurrency CellConfiguration {
     typealias Configurator = ImageLabelCellConfigurator
     
     func configure(with configurator: Configurator) {

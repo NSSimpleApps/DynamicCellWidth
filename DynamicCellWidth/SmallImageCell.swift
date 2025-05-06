@@ -35,7 +35,7 @@ class SmallImageCell: UICollectionViewCell {
     }
 }
 
-extension SmallImageCell: SizeLayout {
+extension SmallImageCell: @preconcurrency SizeLayout {
     typealias SizeContext = UIImage
     
     static func size(using context: SizeContext,
@@ -49,7 +49,7 @@ protocol ImageCellConfigurator {
     var image: UIImage? { get }
 }
 
-extension SmallImageCell: CellConfiguration {
+extension SmallImageCell: @preconcurrency CellConfiguration {
     typealias Configurator = ImageCellConfigurator
     
     func configure(with configurator: Configurator) {
